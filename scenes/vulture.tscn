@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdadjamwb6di6"]
+
+[ext_resource type="Texture2D" uid="uid://b6wc3fpw84tmd" path="res://assets/obstacles/Vulture_walk.png" id="1_aaqyy"]
+[ext_resource type="Script" uid="uid://l6dubde047x3" path="res://scripts/vulture.gd" id="1_vdhiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdhiy"]
+atlas = ExtResource("1_aaqyy")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kurf4"]
+atlas = ExtResource("1_aaqyy")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqq54"]
+atlas = ExtResource("1_aaqyy")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_die2u"]
+atlas = ExtResource("1_aaqyy")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0gxl8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdhiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kurf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqq54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_die2u")
+}],
+"loop": true,
+"name": &"Flying",
+"speed": 10.0
+}]
+
+[node name="Vulture" type="Area2D"]
+script = ExtResource("1_vdhiy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_0gxl8")
+animation = &"Flying"
+autoplay = "Flying"
+frame_progress = 0.200237
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-30.2014, 8.8269)
+scale = Vector2(1.38405, 0.862723)
+polygon = PackedVector2Array(-20.8076, 17.5875, -8.53311, 18.8113, 47.8318, 88.2938, 91.1829, 89.4529, 89.7379, -46.1642, 38.439, -34.573, -9.24725, -19.5044, -17.9175, -6.75408)

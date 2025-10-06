@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1xfvs621lyap"]
+
+[ext_resource type="Texture2D" uid="uid://bltm4iuunfos" path="res://assets/jungle tileset_r9_c6_processed_by_imagy.png" id="1_pybca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi8v4"]
+size = Vector2(2743, 64)
+
+[node name="Ground" type="StaticBody2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -439.0
+offset_top = 584.0
+offset_right = 475.0
+offset_bottom = 612.0
+scale = Vector2(3, 2.36)
+texture = ExtResource("1_pybca")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(932.5, 618)
+shape = SubResource("RectangleShape2D_mi8v4")
