@@ -1,4 +1,4 @@
 extends Area2D
 
 func _process(delta):
-	position.x -= get_parent().speed * 0.75
+	position.x -= get_parent().speed * 0.4

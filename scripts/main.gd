@@ -22,8 +22,8 @@ const dino_start_pos := Vector2i(150, 485)
 const cam_start_pos := Vector2i(576, 324)
 const max_difficulty : int = 2
 const score_modifier : int = 1
-const start_speed : float = 0.3
-const max_speed : float = 0.625
+const start_speed : float = 2
+const max_speed : float = 5
 const speed_modifier : int = 150
 
 func _ready():
@@ -63,13 +63,13 @@ func new_game():
 
 func _process(delta):
 	if game_running:
-		var movement = speed
+		var movement = speed * delta * 60
 		
 		generate_obs()
 		for obs in obstacles:
 			obs.position.x -= movement
-		$Dino.position.x += speed
-		$Camera2D.position.x += speed
+		$Dino.position.x += movement
+		$Camera2D.position.x += movement
 		$Ground.position.x -= movement
 		$Bg.scroll_offset.x -= movement * 0.8
 		if $Ground.position.x <= -screen_size.x:
@@ -81,15 +81,14 @@ func _process(delta):
 		else: 
 			speed = max_speed
 		adjust_difficulty()
-		print(speed)
 		
 		time_accumulator += delta
-		if time_accumulator >= 0.13:
-			score += score_modifier
+		if time_accumulator >= 0.022:
+			score += score_modifier 
 			time_accumulator = 0
-		score += speed
+		score += movement
 		show_score()
-		
+		print(speed)
 		if $Camera2D.position.x - $Ground.position.x > screen_size.x * 1.5:
 			$Ground.position.x += screen_size.x
 			
@@ -137,7 +136,8 @@ func generate_obs():
 			var obs_x : int = camera_right_edge + base_x_offset + (i * min_spacing)
 			if obs_x > camera_right_edge + screen_size.x * 0.8:
 				break
-			var obs_y : int = screen_size.y - ground_height - (obs_height + obs_scale.y / 2) - 156
+			var ground_top = $Ground.position.y
+			var obs_y : int = ground_top - (obs_height * obs_scale.y) + 650
 			last_obs = obs
 			add_obs(obs, obs_x, obs_y)
 		if difficulty == max_difficulty:
